@@ -1,0 +1,10 @@
+{
+  "name": "Mini AI Studio",
+  "short_name": "Mini AI",
+  "description": "A local-first AI chat and coding workspace.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#212121",
+  "theme_color": "#212121",
+  "orientation": "portrait"
+}

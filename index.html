@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#212121">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mini AI Studio">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+<title>Mini AI Studio</title>
+</head>
+<body>
+<div class="app">
+  <aside id="sidebar" class="sidebar">
+    <div class="brand"><span class="brand-mark">✳</span><span>Mini AI Studio</span><button id="closeSidebar" class="icon mobile-only" aria-label="Close menu">×</button></div>
+    <button id="newChat" class="new-chat">＋ <span>New chat</span></button>
+    <div class="side-label">YOUR CHATS</div><div id="chatList" class="chat-list"></div>
+    <div class="sidebar-bottom">
+      <button id="projectsBtn" class="side-action">▣ <span>Projects & files</span></button>
+      <button id="settingsBtn" class="side-action">⚙ <span>Settings & models</span></button>
+      <div class="local-note"><span class="green-dot"></span> Local-first workspace</div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <button id="openSidebar" class="icon mobile-only" aria-label="Open menu">☰</button>
+      <div class="model-wrap"><button id="modelButton" class="model-button"><span id="modelName">Choose a model</span><span>⌄</span></button><div id="modelMenu" class="model-menu hidden"></div></div>
+      <span class="local-pill">ON-DEVICE AI</span>
+    </header>
+    <section id="conversation" class="conversation">
+      <div id="welcome" class="welcome">
+        <div class="welcome-symbol">✳</div><h1>What are we building?</h1>
+        <p>Chat, code, and manage projects with local AI.</p>
+        <div class="suggestions">
+          <button data-prompt="Help me plan a Roblox game in Luau.">🎮 <span><b>Build a Roblox game</b><small>Plan systems and scripts</small></span></button>
+          <button data-prompt="Create a simple responsive website. Start by outlining the files.">⌘ <span><b>Create a website</b><small>Plan a multi-file project</small></span></button>
+          <button data-prompt="Explain how to debug a program step by step.">⌕ <span><b>Debug some code</b><small>Find and explain errors</small></span></button>
+          <button data-prompt="Help me organize a project and remember its requirements.">▣ <span><b>Organize a project</b><small>Keep files and project notes</small></span></button>
+        </div>
+        <div class="setup-warning"><b>First setup:</b> choose a model above and load it. Model files can be large and need an internet connection to download once. Generation is intended to happen on this device.</div>
+      </div>
+      <div id="messages" class="messages"></div>
+      <div id="working" class="working hidden"><span class="spinner"></span><span id="workingText">Loading model…</span></div>
+    </section>
+    <footer class="composer-area">
+      <div id="attachmentInfo" class="attachment-info hidden"></div>
+      <form id="composer" class="composer">
+        <button type="button" id="attachBtn" class="composer-icon" title="Add project text file">＋</button>
+        <input id="fileInput" type="file" accept=".txt,.md,.js,.ts,.html,.css,.json,.lua,.luau,.py,.xml,.csv" multiple hidden>
+        <textarea id="prompt" rows="1" placeholder="Message Mini AI Studio…" aria-label="Message"></textarea>
+        <button id="sendBtn" type="submit" class="send-button" aria-label="Send">↑</button>
+      </form>
+      <div class="disclaimer">Local model responses can be incorrect. Check generated code before using it.</div>
+    </footer>
+  </main>
+</div>
+<div id="toast" class="toast hidden"></div>
+<dialog id="settingsDialog" class="modal"><div class="modal-head"><h2>Settings & models</h2><button class="icon" data-close="settingsDialog">×</button></div>
+<p class="muted">Choose a real model. The first load downloads model files; keep Safari open while it loads.</p>
+<label class="field-label" for="settingsModel">Model</label><select id="settingsModel"></select>
+<div id="modelDetails" class="model-details"></div>
+<button id="loadModel" class="primary wide">Load selected model</button>
+<div id="loadProgress" class="progress-text"></div>
+<hr><h3>Privacy & storage</h3><p class="muted">Chats, project notes, and settings are stored in this browser where supported. Clearing Safari website data may erase them. Model caching depends on Safari and the model runtime.</p>
+<button id="exportData" class="secondary wide">Export chats & project notes</button>
+<button id="clearData" class="danger wide">Clear local chats and project notes</button>
+</dialog>
+<dialog id="projectsDialog" class="modal"><div class="modal-head"><h2>Projects & files</h2><button class="icon" data-close="projectsDialog">×</button></div>
+<label class="field-label" for="projectName">Project name</label><input id="projectName" class="text-input" placeholder="e.g. Shoot a Brainrot">
+<label class="field-label" for="projectNotes">Project memory / instructions</label><textarea id="projectNotes" class="notes-input" placeholder="Goal, language, requirements, decisions, known bugs…"></textarea>
+<div class="button-row"><button id="saveProject" class="primary">Save project memory</button><button id="exportProject" class="secondary">Export project ZIP</button></div>
+<hr><h3>Project files</h3><p class="muted">Add text/code files using the ＋ button beside the message box. Files are included in the project export.</p><div id="projectFiles" class="project-files"></div>
+</dialog>
+<script type="module" src="app.js"></script>
+</body></html>
